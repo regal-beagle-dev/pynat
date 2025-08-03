@@ -129,18 +129,20 @@ class RandomCharField(CharField):
         name, path, args, kwargs = super().deconstruct()
         kwargs["length"] = self.length
         del kwargs["max_length"]
-        if self.lowercase is True:
-            kwargs["lowercase"] = self.lowercase
-        if self.uppercase is True:
-            kwargs["uppercase"] = self.uppercase
-        if self.include_alpha is False:
-            kwargs["include_alpha"] = self.include_alpha
-        if self.include_digits is False:
-            kwargs["include_digits"] = self.include_digits
-        if self.include_punctuation is True:
-            kwargs["include_punctuation"] = self.include_punctuation
-        if self.unique is True:
-            kwargs["unique"] = self.unique
+
+        optional_params = [
+            ("lowercase", self.lowercase, True),
+            ("uppercase", self.uppercase, True),
+            ("include_alpha", self.include_alpha, False),
+            ("include_digits", self.include_digits, False),
+            ("include_punctuation", self.include_punctuation, True),
+            ("unique", self.unique, True),
+        ]
+
+        kwargs |= {
+            name: val for name, val, trigger in optional_params if val is trigger
+        }
+
         return name, path, args, kwargs
 
     def check_is_bool(self, attrname):
