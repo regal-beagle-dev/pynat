@@ -1,11 +1,97 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pynat"
+version = "0.0.1"
+description = "UV package management"
+requires-python = ">=3.12"
+authors = [{ name = "Curtis", email = "curtis@regalbeagle.dev" }]
+
+dependencies = [
+  # Core utilities
+  "python-slugify==8.0.4",
+  "Pillow==11.3.0",
+  "argon2-cffi==25.1.0",
+  "whitenoise==6.9.0",
+
+  # Redis and Celery
+  "redis==6.2.0",
+  "hiredis==3.2.1",
+  "celery==5.5.3",
+  "django-celery-beat==2.8.1",
+  "flower==2.0.1",
+
+  # ASGI server
+  "uvicorn[standard]==0.35.0",
+  "uvicorn-worker==0.3.0",
+
+  # Django core
+  "django==5.1.11",
+  "django-environ==0.12.0",
+  "django-model-utils==5.0.0",
+  "django-allauth[mfa]==65.10.0",
+  "django-crispy-forms==2.4",
+  "crispy-bootstrap5==2025.6",
+  "django-redis==6.0.0",
+]
+
+[project.optional-dependencies]
+# Development dependencies
+dev = [
+  "Werkzeug[watchdog]==3.1.3",
+  "ipdb==0.13.13",
+  "psycopg[c]==3.2.9",
+  "watchfiles==1.1.0",
+
+  # Testing
+  "mypy==1.17.0",
+  "django-stubs[compatible-mypy]==5.2.2",
+  "pytest==8.4.1",
+  "pytest-sugar==1.0.0",
+  "factory-boy==3.3.2",
+  "pytest-django==4.11.1",
+
+  # Documentation
+  "sphinx==8.2.3",
+  "sphinx-autobuild==2024.10.3",
+
+  # Code quality
+  "ruff==0.12.5",
+  "coverage==7.10.0",
+  "djlint==1.36.4",
+  "pre-commit==4.2.0",
+
+  # Django dev tools
+  "django-debug-toolbar==5.2.0",
+  "django-extensions==4.1",
+  "django-coverage-plugin==3.1.1",
+]
+
+# Production dependencies
+prod = [
+  "gunicorn==23.0.0",
+  "psycopg[c]==3.2.9",
+  "sentry-sdk==2.33.2",
+  "django-anymail==13.0.1",
+]
+
+[tool.uv]
+# UV-specific configuration
+dev-dependencies = ["pynat[dev]"]
+
+# Specify index strategy for better reproducibility
+index-strategy = "unsafe-best-match"
+
+# Handle pre-releases
+prerelease = "disallow"
+
 # ==== pytest ====
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "--ds=config.settings.test --reuse-db --import-mode=importlib"
-python_files = [
-    "tests.py",
-    "test_*.py",
-]
+python_files = ["tests.py", "test_*.py"]
 
 # ==== Coverage ====
 [tool.coverage.run]
@@ -21,9 +107,7 @@ ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
-plugins = [
-    "mypy_django_plugin.main",
-]
+plugins = ["mypy_django_plugin.main"]
 
 [[tool.mypy.overrides]]
 # Django migrations should not produce any errors:
@@ -52,13 +136,11 @@ indent_size = 2
 [tool.djlint.js]
 indent_size = 2
 
+# ==== Ruff ====
 [tool.ruff]
 target-version = "py312"
 # Exclude a variety of commonly ignored directories.
-extend-exclude = [
-    "*/migrations/*.py",
-    "staticfiles/*",
-]
+extend-exclude = ["*/migrations/*.py", "staticfiles/*"]
 
 [tool.ruff.lint]
 select = [
@@ -118,19 +200,17 @@ select = [
   "RUF",
 ]
 ignore = [
-  "S101", # Use of assert detected https://docs.astral.sh/ruff/rules/assert/
+  "S101",   # Use of assert detected https://docs.astral.sh/ruff/rules/assert/
   "RUF012", # Mutable class attributes should be annotated with `typing.ClassVar`
   "SIM102", # sometimes it's better to nest
-  "UP038", # Checks for uses of isinstance/issubclass that take a tuple
-          # of types for comparison.
-          # Deactivated because it can make the code slow:
-          # https://github.com/astral-sh/ruff/issues/7871
+  "UP038",  # Checks for uses of isinstance/issubclass that take a tuple
+  # of types for comparison.
+  # Deactivated because it can make the code slow:
+  # https://github.com/astral-sh/ruff/issues/7871
 ]
 # The fixes in extend-unsafe-fixes will require
 # provide the `--unsafe-fixes` flag when fixing.
-extend-unsafe-fixes = [
-  "UP038",
-]
+extend-unsafe-fixes = ["UP038"]
 
 [tool.ruff.lint.isort]
 force-single-line = true
