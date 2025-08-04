@@ -28,7 +28,7 @@ dependencies = [
   "uvicorn-worker==0.3.0",
 
   # Django core
-  "django==5.1.11",
+  "django==5.2.4",
   "django-environ==0.12.0",
   "django-model-utils==5.0.0",
   "django-allauth[mfa]==65.10.0",
@@ -46,11 +46,11 @@ dev = [
   "watchfiles==1.1.0",
 
   # Testing
-  "mypy==1.17.0",
+  "mypy==1.17.1",
   "django-stubs[compatible-mypy]==5.2.2",
   "pytest==8.4.1",
   "pytest-sugar==1.0.0",
-  "factory-boy==3.3.2",
+  "factory-boy==3.3.3",
   "pytest-django==4.11.1",
 
   # Documentation
@@ -58,8 +58,8 @@ dev = [
   "sphinx-autobuild==2024.10.3",
 
   # Code quality
-  "ruff==0.12.5",
-  "coverage==7.10.0",
+  "ruff==0.12.7",
+  "coverage==7.10.2",
   "djlint==1.36.4",
   "pre-commit==4.2.0",
 
@@ -73,7 +73,7 @@ dev = [
 prod = [
   "gunicorn==23.0.0",
   "psycopg[c]==3.2.9",
-  "sentry-sdk==2.33.2",
+  "sentry-sdk==2.34.1",
   "django-anymail==13.0.1",
 ]
 
