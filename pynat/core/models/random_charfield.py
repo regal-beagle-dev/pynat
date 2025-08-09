@@ -67,7 +67,8 @@ class RandomCharField(CharField):
         self.keep_default = kwargs.pop("keep_default", False)
         self.check_is_bool("include_punctuation")
         self.max_unique_query_attempts = kwargs.pop(
-            "max_unique_query_attempts", MAX_UNIQUE_QUERY_ATTEMPTS
+            "max_unique_query_attempts",
+            MAX_UNIQUE_QUERY_ATTEMPTS,
         )
 
         # Set unique=False unless it's been set manually.
@@ -80,7 +81,7 @@ class RandomCharField(CharField):
         for _ in range(self.max_unique_query_attempts):
             yield "".join(get_random_string(self.length, chars))
         raise RuntimeError(
-            f"max random character attempts exceeded ({self.max_unique_query_attempts})"
+            f"max random character attempts exceeded ({self.max_unique_query_attempts})",
         )
 
     def in_unique_together(self, model_instance):
@@ -91,7 +92,8 @@ class RandomCharField(CharField):
 
     def pre_save(self, model_instance, add):
         if (not add or self.keep_default) and getattr(
-            model_instance, self.attname
+            model_instance,
+            self.attname,
         ) != "":
             return getattr(model_instance, self.attname)
 
@@ -147,7 +149,7 @@ class RandomCharField(CharField):
 
     def check_is_bool(self, attrname):
         if not isinstance(getattr(self, attrname), bool):
-            raise ValueError("'{}' argument must be True or False".format(attrname))
+            raise ValueError(f"'{attrname}' argument must be True or False")
 
     @staticmethod
     def _get_fields(model_cls):
@@ -182,7 +184,8 @@ class RandomCharField(CharField):
         constraints = getattr(model_instance._meta, "constraints", None)
         if constraints:
             unique_constraints = filter(
-                lambda c: isinstance(c, UniqueConstraint), constraints
+                lambda c: isinstance(c, UniqueConstraint),
+                constraints,
             )
             for unique_constraint in unique_constraints:
                 if self.attname in unique_constraint.fields:

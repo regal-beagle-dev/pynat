@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 
-from core.models import fields
+from pynat.core.models.random_charfield import RandomCharField
 
 
 class BaseManager(models.Manager):
@@ -13,9 +13,9 @@ class BaseManager(models.Manager):
 
 
 class BaseModel(models.Model):
-    id = fields.RandomCharField(
+    id = RandomCharField(
         primary_key=True,
-        length=12,
+        length=10,
         include_alpha=True,
         include_digits=True,
         unique=True,
