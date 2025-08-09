@@ -7,7 +7,7 @@ from pynat.core.models import BaseModel
 
 
 class User(AbstractUser, BaseModel):
-    username = models.CharField(_("Username"), null=False, max_length=150)
+    username = models.CharField(_("Username"), unique=True, null=False, max_length=150)
     name = models.CharField(_("Name of User"), blank=True, max_length=255)
     email = models.EmailField(_("Email"), blank=True)
 
