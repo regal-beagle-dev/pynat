@@ -17,7 +17,7 @@ dependencies = [
   "whitenoise==6.9.0",
 
   # Redis and Celery
-  "redis==6.2.0",
+  "redis==6.4.0",
   "hiredis==3.2.1",
   "celery==5.5.3",
   "django-celery-beat==2.8.1",
@@ -28,10 +28,10 @@ dependencies = [
   "uvicorn-worker==0.3.0",
 
   # Django core
-  "django==5.1.11",
+  "django==5.2.5",
   "django-environ==0.12.0",
   "django-model-utils==5.0.0",
-  "django-allauth[mfa]==65.10.0",
+  "django-allauth[mfa]==65.11.0",
   "django-crispy-forms==2.4",
   "crispy-bootstrap5==2025.6",
   "django-redis==6.0.0",
@@ -46,11 +46,11 @@ dev = [
   "watchfiles==1.1.0",
 
   # Testing
-  "mypy==1.17.0",
+  "mypy==1.17.1",
   "django-stubs[compatible-mypy]==5.2.2",
   "pytest==8.4.1",
-  "pytest-sugar==1.0.0",
-  "factory-boy==3.3.2",
+  "pytest-sugar==1.1.0",
+  "factory-boy==3.3.3",
   "pytest-django==4.11.1",
 
   # Documentation
@@ -58,10 +58,10 @@ dev = [
   "sphinx-autobuild==2024.10.3",
 
   # Code quality
-  "ruff==0.12.5",
-  "coverage==7.10.0",
+  "ruff==0.12.9",
+  "coverage==7.10.4",
   "djlint==1.36.4",
-  "pre-commit==4.2.0",
+  "pre-commit==4.3.0",
 
   # Django dev tools
   "django-debug-toolbar==5.2.0",
@@ -73,7 +73,7 @@ dev = [
 prod = [
   "gunicorn==23.0.0",
   "psycopg[c]==3.2.9",
-  "sentry-sdk==2.33.2",
+  "sentry-sdk==2.35.0",
   "django-anymail==13.0.1",
 ]
 
