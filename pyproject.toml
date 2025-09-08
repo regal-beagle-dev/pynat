@@ -55,7 +55,7 @@ dev = [
 
   # Documentation
   "sphinx==8.2.3",
-  "sphinx-autobuild==2024.10.3",
+  "sphinx-autobuild==2025.8.25",
 
   # Code quality
   "ruff==0.12.5",
